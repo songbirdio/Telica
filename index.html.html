@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TELICA Digital Concepts</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --navy: #000066;
+        --orange: #ff6633;
+        --white: #ffffff;
+        --light: #f7f8fc;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --shadow: 0 15px 40px rgba(0, 0, 102, 0.08);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        color: var(--text);
+        background: var(--white);
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1120px, 92%);
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 90px 0;
+      }
+
+      .eyebrow {
+        color: var(--orange);
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        margin-bottom: 14px;
+      }
+
+      .eyebrow.light {
+        color: #ffd2c3;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Unbounded", sans-serif;
+        line-height: 1.2;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 5vw, 4rem);
+      }
+
+      h2 {
+        font-size: clamp(1.8rem, 4vw, 3rem);
+      }
+
+      h3 {
+        font-size: 1.15rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(0, 0, 102, 0.08);
+      }
+
+      .nav-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: -15px 0;
+      }
+
+      .logo-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .logo {
+        height: auto;
+        object-fit: contain;
+      }
+
+      .header-logo {
+        width: 100px;
+        max-width: 100%;
+      }
+
+      .footer-logo {
+        width: 80px;
+        max-width: 100%;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .nav-links a {
+        color: var(--navy);
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--orange);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        font-size: 1.8rem;
+        color: var(--navy);
+        cursor: pointer;
+      }
+
+      .hero {
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(255, 102, 51, 0.18),
+            transparent 22%
+          ),
+          linear-gradient(135deg, var(--navy), #071a9b);
+        color: var(--white);
+        padding: 110px 0 90px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .hero-description {
+        max-width: 620px;
+        margin-top: 22px;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 1.05rem;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 16px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 24px;
+        border-radius: 14px;
+        font-weight: 700;
+        transition: 0.3s ease;
+      }
+
+      .btn-primary {
+        background: var(--orange);
+        color: var(--white);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+      }
+
+      .btn-secondary {
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      .hero-card {
+        background: var(--white);
+        color: var(--text);
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card h3 {
+        color: var(--navy);
+        margin-bottom: 22px;
+      }
+
+      .hero-points {
+        display: grid;
+        gap: 18px;
+      }
+
+      .point {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .point span {
+        width: 12px;
+        height: 12px;
+        min-width: 12px;
+        background: var(--orange);
+        border-radius: 50%;
+        margin-top: 7px;
+      }
+
+      .section-heading {
+        max-width: 760px;
+        margin-bottom: 45px;
+      }
+
+      .section-heading p:last-child {
+        color: var(--muted);
+        margin-top: 14px;
+      }
+
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+
+      .service-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 28px 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 102, 0.04);
+        transition: 0.3s ease;
+      }
+
+      .service-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow);
+      }
+
+      .icon-box {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: var(--navy);
+        margin-bottom: 18px;
+      }
+
+      .service-card h3 {
+        color: var(--navy);
+        margin-bottom: 12px;
+      }
+
+      .service-card p {
+        color: var(--muted);
+      }
+
+      .alt-bg {
+        background: var(--light);
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        align-items: start;
+      }
+
+      .section-text {
+        color: var(--muted);
+        margin-top: 16px;
+        max-width: 560px;
+      }
+
+      .benefit-list {
+        display: grid;
+        gap: 18px;
+      }
+
+      .benefit-item {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 22px;
+        border: 1px solid var(--border);
+      }
+
+      .benefit-item h4 {
+        color: var(--navy);
+        margin-bottom: 8px;
+        font-size: 1rem;
+      }
+
+      .benefit-item p {
+        color: var(--muted);
+      }
+
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .process-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 28px 24px;
+        box-shadow: 0 8px 28px rgba(0, 0, 102, 0.04);
+      }
+
+      .step-number {
+        display: inline-block;
+        font-family: "Unbounded", sans-serif;
+        background: var(--navy);
+        color: var(--white);
+        padding: 10px 14px;
+        border-radius: 14px;
+        margin-bottom: 18px;
+      }
+
+      .process-card h3 {
+        color: var(--navy);
+        margin-bottom: 12px;
+      }
+
+      .process-card p {
+        color: var(--muted);
+      }
+
+      .cta-box {
+        background: linear-gradient(135deg, var(--navy), #0a128f);
+        color: var(--white);
+        border-radius: 30px;
+        padding: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .cta-box h2 {
+        max-width: 700px;
+      }
+
+      .footer {
+        background: #ffffff;
+        padding: 30px 0;
+      }
+
+      .footer-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-bottom: -30px;
+      }
+
+      .footer-text {
+        text-align: right;
+        color: #040957;
+      }
+
+      .footer-text small {
+        display: block;
+        margin-top: 8px;
+        color: #0a128f;
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .two-column,
+        .service-grid,
+        .process-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .service-grid,
+        .process-grid {
+          gap: 20px;
+        }
+
+        .cta-box {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
+
+        .nav-links {
+          position: absolute;
+          top: 78px;
+          right: 4%;
+          background: var(--white);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          padding: 16px;
+          box-shadow: var(--shadow);
+          flex-direction: column;
+          align-items: flex-start;
+          min-width: 200px;
+          display: none;
+        }
+
+        .nav-links.show {
+          display: flex;
+        }
+
+        .hero-grid,
+        .two-column,
+        .service-grid,
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header-logo {
+          width: 170px;
+        }
+
+        .footer-logo {
+          width: 180px;
+        }
+
+        .hero {
+          padding: 90px 0 70px;
+        }
+
+        .section {
+          padding: 70px 0;
+        }
+
+        .footer-content,
+        .footer-text {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container nav-content">
+        <a href="#" class="logo-wrap">
+          <img
+            src="telica-logo-light.png"
+            alt="TELICA Digital Concepts Logo"
+            class="logo header-logo"
+          />
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+          <a href="#services">Services</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle navigation"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">Professional. Modern. Youth-Centric.</p>
+          <h1>
+            Smart digital solutions that help businesses grow with confidence.
+          </h1>
+          <p class="hero-description">
+            TELICA Digital Concepts supports ambitious brands with strategy,
+            design, digital marketing, and modern web experiences that turn
+            attention into real business opportunities.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Book a Consultation</a>
+            <a href="#services" class="btn btn-secondary">Explore Services</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>Why business clients work with TELICA</h3>
+          <div class="hero-points">
+            <div class="point">
+              <span></span>
+              <p>Clear service presentation tailored for decision-makers</p>
+            </div>
+            <div class="point">
+              <span></span>
+              <p>Bold creative direction with a professional finish</p>
+            </div>
+            <div class="point">
+              <span></span>
+              <p>Conversion-focused structure that encourages inquiries</p>
+            </div>
+            <div class="point">
+              <span></span>
+              <p>Energetic brand expression backed by credibility and trust</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Our Services</p>
+          <h2>Solutions designed for modern brands and business growth</h2>
+          <p>
+            A clean service layout that helps potential clients quickly
+            understand what TELICA offers and why it matters to their business.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="icon-box"></div>
+            <h3>Brand Strategy</h3>
+            <p>
+              Shape a stronger business identity with positioning, messaging,
+              and direction that connects with the right audience.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box"></div>
+            <h3>Creative Design</h3>
+            <p>
+              Build impactful visuals for campaigns, social media, brand assets,
+              and other customer-facing touchpoints.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box"></div>
+            <h3>Digital Marketing</h3>
+            <p>
+              Reach and engage more customers through smart digital campaigns
+              built for visibility, interaction, and lead generation.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box"></div>
+            <h3>Web Design</h3>
+            <p>
+              Launch responsive websites and landing pages that communicate
+              clearly and guide visitors toward action.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-us section alt-bg" id="why-us">
+      <div class="container two-column">
+        <div>
+          <p class="eyebrow">Why TELICA</p>
+          <h2>A fresh creative approach with business-focused results</h2>
+          <p class="section-text">
+            TELICA combines vibrant brand expression with structure and
+            strategy. The experience is designed to feel modern and youthful
+            while still giving business clients the confidence they need to
+            trust the brand.
+          </p>
+        </div>
+
+        <div class="benefit-list">
+          <div class="benefit-item">
+            <h4>Clarity</h4>
+            <p>
+              Service sections are easy to scan, understand, and act on quickly.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <h4>Consistency</h4>
+            <p>
+              The visual system supports a strong, recognizable brand identity.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <h4>Creativity</h4>
+            <p>
+              The design feels bold, current, and aligned with youthful energy.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <h4>Conversion</h4>
+            <p>
+              Calls to action are positioned to turn interest into inquiries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process section" id="process">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Our Process</p>
+          <h2>How TELICA helps brands move forward</h2>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-card">
+            <span class="step-number">01</span>
+            <h3>Discover</h3>
+            <p>
+              Learn about the client’s goals, audience, challenges, and
+              opportunities.
+            </p>
+          </div>
+          <div class="process-card">
+            <span class="step-number">02</span>
+            <h3>Create</h3>
+            <p>
+              Develop strategic visuals, messaging, and digital assets that fit
+              the brand.
+            </p>
+          </div>
+          <div class="process-card">
+            <span class="step-number">03</span>
+            <h3>Launch</h3>
+            <p>
+              Deliver polished digital solutions designed to attract, engage,
+              and convert.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta section" id="contact">
+      <div class="container cta-box">
+        <div>
+          <p class="eyebrow light">Ready to grow your brand?</p>
+          <h2>
+            Let’s create a digital presence your clients will notice and trust.
+          </h2>
+        </div>
+        <a href="mailto:telicaafrica22@gmail.com" class="btn btn-primary"
+          >Start Your Project</a
+        >
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <img
+          src="telica-logo-dark.png"
+          alt="TELICA Digital Concepts Footer Logo"
+          class="logo footer-logo"
+        />
+
+        <div class="footer-text">
+          <p>Creative digital solutions for modern businesses.</p>
+          <small>Designed by songbird.io</small>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("show");
+        });
+      });
+    </script>
+  </body>
+</html>
